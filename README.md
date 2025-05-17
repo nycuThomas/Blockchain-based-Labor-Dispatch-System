@@ -1,7 +1,6 @@
 # Blockchain-based Labor Dispatch System
 
 This repository contains the source code for the research paper:
-
 **"Blockchain-based Labor Dispatch System"**  
 Author: Ching-Hsi Tseng, Yu-Heng Hsieh, Wei-Qi Chen, Shyan-Ming Yuan , NYCU  
 Date: 2025
