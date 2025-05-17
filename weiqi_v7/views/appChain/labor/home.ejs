@@ -1,0 +1,123 @@
+<%- include('./header') %>
+
+    <% if(info.length){ %>
+        <% if(info=="Created successfully." ){ %>
+            <div class="alert alert-success">
+                <%= info %>
+            </div>
+        <% } else { %>
+            <div class="alert alert-danger">
+                <%= info %>
+            </div>
+            <% } %>
+    <% } %>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center my-4">
+            <div class="col-md-4 center-block">
+                <div class="card shadow text-center">
+                    <div class="card-header bg-primary">
+                        <h3 class="text-light">Welcome</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="person-tab" data-bs-toggle="tab" href="#person" role="tab" aria-controls="person" aria-selected="true">Person</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="organization-tab" data-bs-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="person" role="tabpanel" aria-labelledby="person-tab">
+                                <form action="/appChain/labor/login" method="post" class="mt-4">
+                                    <div class="input-group">
+                                        <input type="text" name="userName" placeholder="User Name" required="required" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group">
+                                            <input type="password" name="IDNumber" placeholder="ID Card Number" data-bs-toggle="password" required="required" class="form-control">
+                                            <div class="input-group-append" style="cursor: pointer;"></div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="login" class="btn btn-primary btn-lg btn-block mt-3">
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
+                                <form action="/appChain/labor/loginOrg" method="post" class="mt-4">
+                                    <div class="input-group"><input type="text" name="organizationName" placeholder="Organization Name" required="required" class="form-control"></div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group">
+                                            <input type="password" name="uniformNumber" placeholder="Uniform Number" data-bs-toggle="password" required="required" class="form-control">
+                                            <div class="input-group-append" style="cursor: pointer;"></div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="login" class="btn btn-primary btn-lg btn-block mt-3">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center my-4">
+            <div class="col-md-4 center-block">
+                <div class="card shadow text-center">
+                    <div class="card-header bg-primary">
+                        <h3 class="text-light">Welcome</h3>
+                    </div>
+                    <div class="card-body">
+                        <button id="loginWithMetamask" class="btn btn-primary btn-lg btn-block mt-3">
+                            Metamask Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var account;
+        var require_signature = "<%= require_signature  %>"
+        //listener
+        async function buildListener() {
+            window.ethereum.on('accountsChanged', function (accounts) {
+                account = accounts[0];
+            });
+            $("#loginWithMetamask").on('click', async function (e) {
+                let result = await web3.eth.personal.sign(require_signature, account);
+                console.log(result)
+                $.ajax({
+                    url: '/appChain/labor/loginWithMetamask',
+                    data: {
+                        signature: result,   // signature
+                        account: account  // account
+                    },
+                    type: 'post',
+                    success: function (result) {
+                        if(result.msg){
+                            console.log(result.msg)
+                        }
+                        else if(result.url){
+                            window.location.href = result.url;
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            });
+        }
+    
+        async function main() {
+            let accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+            buildListener();
+        }
+        main();
+    </script>
+
+<%- include('./footer') %>

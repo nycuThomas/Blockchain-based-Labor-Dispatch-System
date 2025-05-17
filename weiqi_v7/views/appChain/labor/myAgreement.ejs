@@ -1,0 +1,497 @@
+<%- include('./header') %>
+
+<% if(info.length){ %>
+    <% if(info=="Created successfully." ){ %>
+        <div class="alert alert-success">
+            <%= info %>
+        </div>
+    <% } else { %>
+        <div class="alert alert-danger">
+            <%= info %>
+        </div>
+        <% } %>
+<% } %>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h3>My Agreement</h3>
+            <div class="table-responsive">
+                <table class="table table-striped text-center my-3">
+                        <thead>
+                            <tr class="table-dark text-center">
+                                <th>Sender</th>
+                                <th>Sender ID</th>
+                                <th>Receiver</th>
+                                <th>Receiver ID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle">
+                                <td>TSMC</td>
+                                <td>777</td>
+                                <td>Adecco</td>
+                                <td>888</td>
+                                <td>
+                                    <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h3>Pending Agreement</h3>
+            <div class="table-responsive">
+                <table class="table table-striped text-center my-3">
+                        <thead>
+                            <tr class="table-dark text-center">
+                                <th>Sender</th>
+                                <th>Sender ID</th>
+                                <th>Receiver</th>
+                                <th>Receiver ID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle">
+                                <td>Adecco</td>
+                                <td>888</td>
+                                <td>Peter</td>
+                                <td>111</td>
+                                <td>
+                                    <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                    <a href="" class="text-secondary" type="submit" value="updateAgrmt" data-toggle="modal" data-target="#updateAgrmt">update /</a>
+                                    <a href="" class="text-secondary" type="submit" value="sendAgrmt" data-toggle="modal" data-target="#sendAgrmt">send /</a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>Adecco</td>
+                                <td>888</td>
+                                <td>Mary</td>
+                                <td>222</td>
+                                <td>
+                                    <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                    <a href="" class="text-secondary" type="submit" value="enableAgrmt" data-toggle="modal" data-target="#enableAgrmt">complete /</a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>Adecco</td>
+                                <td>888</td>
+                                <td>Jack</td>
+                                <td>333</td>
+                                <td>
+                                    <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                    <a href="" class="text-secondary" type="submit" value="enableAgrmt" data-toggle="modal" data-target="#enableAgrmt">complete /</a>
+                                </td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td>ManpowerGroup</td>
+                                <td>999</td>
+                                <td>Adecco</td>
+                                <td>888</td>
+                                <td>
+                                    <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                    <a href="" class="text-secondary" type="submit" value="signAgrmt" data-toggle="modal" data-target="#signAgrmt">sign /</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <% if (message) { %>
+                <div class="alert alert-dismissible fade show alert-<%= message.type %>" role="alert">
+                    <button class="btn-class" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong><%= message.message %></strong>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h3>Testing</h3>
+            <div class="table-responsive">
+                    <table class="table table-striped text-center my-3">
+                        <thead>
+                            <tr class="table-dark text-center">
+                                <th>Sender</th>
+                                <th>Sender ID</th>
+                                <th>Receiver</th>
+                                <th>Receiver ID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% Array.from(agrmt).forEach( (row) => {%>
+                                <tr class="align-middle">
+                                    <td><%= row.senderName %></td>
+                                    <td><%= row.senderID %></td>
+                                    <td><%= row.receiverName %></td>
+                                    <td><%= row.receiverID %></td>
+                                    <% if (row.status === "false") { %>
+                                    <td>
+                                        <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                        <a href="" class="text-secondary" type="submit" value="updateAgrmt" data-toggle="modal" data-target="#updateAgrmt">update /</a>
+                                        <a href="" class="text-secondary" type="submit" value="sendAgrmt" data-toggle="modal" data-target="#sendAgrmt">send /</a>
+                                        <a href="" class="text-secondary" type="submit" value="signAgrmt" data-toggle="modal" data-target="#signAgrmt">sign /</a>
+                                        <a href="" class="text-secondary" type="submit" value="enableAgrmt" data-toggle="modal" data-target="#enableAgrmt">complete /</a>
+                                    </td>
+                                    <% } else { %>
+                                    <td>
+                                        <a href="" class="text-secondary" type="submit" value="readAgrmt" data-toggle="modal" data-target="#readAgrmt">read /</a>
+                                    </td>
+                                    <% } %>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="readAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-secondary">
+                <h3 class="text-light text-center">Open Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="agrmtID_1">AgreementID</label>
+                        <input type="text" id="agrmtID_1" name="agrmtID_1" class="form-control form-control-lg" placeholder="Enter AgreementID" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Open" class="btn btn-secondary btn-lg submit-read-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="updateAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-success">
+                <h3 class="text-light text-center">Update Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="agrmtID_2">AgreementID</label>
+                        <input type="text" id="agrmtID_2" name="agrmtID_2" class="form-control form-control-lg" placeholder="Enter AgreementID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="newMessage_2">New Description</label>
+                        <input type="text" id="newMessage_2" name="newMessage_2" class="form-control form-control-lg" placeholder="Enter new description" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Update" class="btn btn-success btn-lg submit-update-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sendAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-success">
+                <h3 class="text-light text-center">Send Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name">Receiver Name</label>
+                        <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter receiver name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="id">Receiver ID</label>
+                        <input type="text" name="id" class="form-control form-control-lg" placeholder="Enter receiver ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="agrmtID_3">AgreementID</label>
+                        <input type="text" id="agrmtID_3" name="agrmtID_3" class="form-control form-control-lg" placeholder="Enter AgreementID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="tradeID_3">TradeID</label>
+                        <input type="text" id="tradeID_3" name="tradeID_3" class="form-control form-control-lg" placeholder="Set TradeID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="verCode_3">Verification Code</label>
+                        <input type="text" id="verCode_3" name="verCode_3" class="form-control form-control-lg" placeholder="Set verification code" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Send" class="btn btn-success btn-lg submit-send-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="signAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-secondary">
+                <h3 class="text-light text-center">Sign Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="senderName_4">Sender Name</label>
+                        <input type="text" id="senderName_4" name="senderName_4" class="form-control form-control-lg" placeholder="Enter Sender Name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="senderID_4">Sender ID</label>
+                        <input type="text" id="senderID_4" name="senderID_4" class="form-control form-control-lg" placeholder="Enter Sender ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiverName_4">Receiver Name</label>
+                        <input type="text" id="receiverName_4" name="receiverName_4" class="form-control form-control-lg" placeholder="Enter Receiver Name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiverID_4">Receiver ID</label>
+                        <input type="text" id="receiverID_4" name="receiverID_4" class="form-control form-control-lg" placeholder="Enter Receiver ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message_4">Description</label>
+                        <input type="text" id="message_4" name="message_4" class="form-control form-control-lg" placeholder="Enter Description" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="salt_4">Salt</label>
+                        <input type="text" id="salt_4" name="salt_4" class="form-control form-control-lg" placeholder="Enter Salt" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="agrmtID_4">AgreementID</label>
+                        <input type="text" id="agrmtID_4" name="agrmtID_4" class="form-control form-control-lg" placeholder="Enter AgreementID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="tradeID_4">TradeID</label>
+                        <input type="text" id="tradeID_4" name="tradeID_4" class="form-control form-control-lg" placeholder="Enter TradeID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="verCode_4">Verification Code</label>
+                        <input type="text" id="verCode_4" name="verCode_4" class="form-control form-control-lg" placeholder="Enter verification code" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Sign" class="btn btn-secondary btn-lg submit-sign-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="enableAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-success">
+                <h3 class="text-light text-center">Complete Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="/enableAgrmt" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="agrmtID_5">AgreementID</label>
+                        <input type="text" id="agrmtID_5" name="agrmtID_5" class="form-control form-control-lg" placeholder="Enter AgreementID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="tradeID_5">TradeID</label>
+                        <input type="text" id="tradeID_5" name="tradeID_5" class="form-control form-control-lg" placeholder="Enter TradeID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="verCode_5">Verification Code</label>
+                        <input type="text" id="verCode_5" name="verCode_5" class="form-control form-control-lg" placeholder="Enter verification code" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Enable" class="btn btn-success btn-lg submit-enable-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    async function buildListener() {
+
+        $(".submit-read-btn").on('click', async function (e) {
+            let agrmtID = $("#agrmtID_1").val();
+
+            
+            let data = {
+                "agrmtID": agrmtID,
+            }
+            
+
+            $.ajax({
+                url: '/appChain/labor/myAgreement/readAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    if (res.url)
+                        window.location.href = res.url;
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+
+        $(".submit-update-btn").on('click', async function (e) {
+            let agrmtID = $("#agrmtID_2").val();
+            let newMessage = $("#newMessage_2").val();
+
+            let data = {
+                "agrmtID": agrmtID,
+                "newMessage": newMessage
+            }
+
+            $.ajax({
+                url: '/appChain/labor/myAgreement/updateAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    alert(res.msg);
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+
+        $(".submit-send-btn").on('click', async function (e) {
+            
+            
+            let agrmtID = $("#agrmtID_3").val();
+            let tradeID = $("#tradeID_3").val();
+            let verCode = $("#verCode_3").val();
+
+            
+            let data = {
+                "agrmtID": agrmtID,
+                "tradeID": tradeID,
+                "verCode": verCode
+            }
+            
+
+            $.ajax({
+                url: '/appChain/labor/myAgreement/sendAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    //alert(res.msg);
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+        
+        $(".submit-sign-btn").on('click', async function (e) {
+            let senderName = $("#senderName_4").val();
+            let senderID = $("#senderID_4").val();
+            let receiverName = $("#receiverName_4").val();
+            let receiverID = $("#receiverID_4").val();
+            let message = $("#message_4").val();
+            let salt = $("#salt_4").val();
+
+            let agrmtID = $("#agrmtID_4").val();
+            let tradeID = $("#tradeID_4").val();
+            let verCode = $("#verCode_4").val();
+
+            let data = {
+                "senderName": senderName,
+                "senderID": senderID,
+                "receiverName": receiverName,
+                "receiverID": receiverID,
+                "message": message,
+                "salt": salt,
+                "agrmtID": agrmtID,
+                "tradeID": tradeID,
+                "verCode": verCode
+            }
+
+            $.ajax({
+                url: '/appChain/labor/myAgreement/signAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    //alert(res.msg);
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+        
+        $(".submit-enable-btn").on('click', async function (e) {
+            let agrmtID = $("#agrmtID_5").val();
+            let tradeID = $("#tradeID_5").val();
+            let verCode = $("#verCode_5").val();
+
+            let data = {
+                "agrmtID": agrmtID,
+                "tradeID": tradeID,
+                "verCode": verCode
+            }
+
+            $.ajax({
+                url: '/appChain/labor/myAgreement/enableAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    alert(res.msg);
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+    }
+
+    async function main() {
+        
+        buildListener();
+    }
+    main();
+</script>
+
+<%- include('./footer') %>

@@ -1,0 +1,248 @@
+<%- include('./header') %>
+
+<% if(info.length){ %>
+    <% if(info=="Created successfully." ){ %>
+        <div class="alert alert-success">
+            <%= info %>
+        </div>
+    <% } else { %>
+        <div class="alert alert-danger">
+            <%= info %>
+        </div>
+        <% } %>
+<% } %>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <% if (message) { %>
+                <div class="alert alert-dismissible fade show alert-<%= message.type %>" role="alert">
+                    <button class="btn-class" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong><%= message.message %></strong>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h3>Company</h3>
+            <div class="table-responsive">
+                <% if (org != '') { %>
+                    <table class="table table-striped text-center my-3">
+                        <thead>
+                            <tr class="table-dark text-center">
+                                <th>Name</th>
+                                <th>Uniform Numbers</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% Array.from(org).forEach( (row) => {%>
+                                <tr class="align-middle">
+                                    <td><%= row.organizationName %></td>
+                                    <td><%= row.UniformNumbers %></td>
+                                    <td>
+                                        <button type="submit" value="createAgrmt" data-toggle="modal" data-target="#createAgrmt" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-file-signature fa-lg"></i></button>
+                                        <button type="submit" value="issueCert" data-toggle="modal" data-target="#issueCert" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-award fa-lg"></i></button>
+                                        <button type="submit" value="readPort" data-toggle="modal" data-target="#readPort" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-address-card fa-lg"></i></button>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <h1 class="text-center text-secondary mt-5">No users found in the database!</h1>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h3>People</h3>
+            <div class="table-responsive">
+                <% if (user != '') { %>
+                    <table class="table table-striped text-center my-3">
+                        <thead>
+                            <tr class="table-dark text-center">
+                                <th>User Name</th>
+                                <th>ID Numbers</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% Array.from(user).forEach( (row) => {%>
+                                <tr class="align-middle">
+                                    <td><%= row.userName %></td>
+                                    <td><%= row.IDNumber %></td>
+                                    <td>
+                                        <button type="submit" value="createAgrmt" data-toggle="modal" data-target="#createAgrmt" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-file-signature fa-lg"></i></button>
+                                        <button type="submit" value="issueCert" data-toggle="modal" data-target="#issueCert" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-award fa-lg"></i></button>
+                                        <button type="submit" value="readPort" data-toggle="modal" data-target="#readPort" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-address-card fa-lg"></i></button>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <h1 class="text-center text-secondary mt-5">No users found in the database!</h1>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="createAgrmt" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-success">
+                <h3 class="text-light text-center">Create Agreement</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="post">
+                    <div class="mb-3">
+                        <label for="sender">Sender Name</label>
+                        <input type="text" id="senderName" name="senderName" class="form-control form-control-lg" placeholder="Enter sender name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="senderDID">Sender ID</label>
+                        <input type="text" id="senderID" name="senderID" class="form-control form-control-lg" placeholder="Enter sender ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiver">Receiver Name</label>
+                        <input type="text" id="receiverName" name="receiverName" class="form-control form-control-lg" placeholder="Enter receiver name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiverDID">Receiver ID</label>
+                        <input type="text" id="receiverID" name="receiverID" class="form-control form-control-lg" placeholder="Enter receiver ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message">Description</label>
+                        <input type="text" id="message" name="message" class="form-control form-control-lg" placeholder="Enter description" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="verCode">Salt</label>
+                        <input type="text" id="salt" name="salt" class="form-control form-control-lg" placeholder="Set salt" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Create" class="btn btn-success btn-lg submit-agrmt-btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="issueCert" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-success">
+                <h3 class="text-light text-center">Send Certificate</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="/issueCert" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="receiver">Receiver Name</label>
+                        <input type="text" name="receiver" class="form-control form-control-lg" placeholder="Enter receiver name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiverDID">Receiver ID</label>
+                        <input type="text" name="receiverID" class="form-control form-control-lg" placeholder="Enter receiver ID" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message">Certificate Name</label>
+                        <input type="text" name="attribute" class="form-control form-control-lg" placeholder="Enter certificate name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message">Access Link</label>
+                        <input type="text" name="accessLink" class="form-control form-control-lg" placeholder="Enter access link" required />
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" name="submit" value="Send" class="btn btn-success btn-lg" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="readPort" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content card shadow">
+            <div class="card-header bg-secondary">
+                <h3 class="text-light text-center">Portfolio</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="/readPort" method="post" id="add-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="sender">Education</label>
+                        <input type="text" name="sender" class="form-control form-control-lg" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="receiver">Profession</label>
+                        <input type="text" name="receiver" class="form-control form-control-lg" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message">Personal</label>
+                        <input type="text" name="message" class="form-control form-control-lg" required />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    async function buildListener() {
+
+        $(".submit-agrmt-btn").on('click', async function (e) {
+            
+            
+            let senderName = $("#senderName").val();
+            let senderID = $("#senderID").val();
+            let receiverName = $("#receiverName").val();
+            let receiverID = $("#receiverID").val();
+            let message = $("#message").val();
+            let salt = $("#salt").val();
+
+            
+            let data = {
+                "senderName": senderName,
+                "senderID": senderID,
+                "receiverName": receiverName,
+                "receiverID": receiverID,
+                "message": message,
+                "salt": salt
+            }
+
+            $.ajax({
+                url: '/appChain/client/lobby/createAgrmt',
+                data: data,
+                type: 'post',
+                success: function (res) {
+                    if (res.url)
+                        window.location.href = res.url;
+                },
+                error: function (err) {
+                    console.log("error");
+                    alert();
+                }
+            });
+
+        });
+    }
+
+    async function main() {
+        
+        buildListener();
+    }
+    main();
+</script>
+
+<%- include('./footer') %>

@@ -1,0 +1,34 @@
+{
+    "contracts": {
+        "identityManagerAddress": "0x395dC108ad06eB9D34Be5b95ee9667277e1Bb993"
+    },
+    "identityChain" :{ 
+        "address" : "0xAc729d331241e90D8FB5a32944272BBE7D8Af542",
+        "key" : "139bc2e17219453c076533bf9e0a072a5e1ebce1463dff64655929a59b47d5f0"
+    },
+    "org_info" :{
+        "agency" : {
+            "address" : "0xe532C11Db382156880C4f627359494E923F50C4B",
+            "key" : "e2584054358e6df8f3d5821c64bdc368a5098f7814c23ceacb10ce5db2b68892"
+        },
+        "client": {
+          "address" : "0xE0397b26C1811d089ad7bd441A178539CB5D83a5",
+          "key" : "bba8f287910b027513c219ba5d2c0a7519e5498030e4075d5547fb7c3ae7a171"
+        },
+        "labor" : {
+            "address": "0x4a6Ce2C91c5abEAddE4c9771384a06Ec74Af8efe",
+            "key":"9470b1d8b519c82eca0a1377d554b8c8887300a90f73065f74f0fd429dd30764"
+        },
+        "gov" : {
+            "address": "0x0A85b472f973Eb88e91Ad5211665f772aE2036cB",
+            "key":"c39c335290a3468b4662afba452c2778b2abe9d8bd4371172b6764763277c6c3"
+        },
+        "dataStorage" :{
+            "address": "0x33481442c3764344bbbDF3a79eD78ec9B88bB548",
+            "key": "5d20f5f6fb4148c37008ab8663a2a3c533f2e7e0acf974a1dac2b2024d1c5421",
+            "host" : "127.0.0.1:3001/dataStorage"
+        }
+    },
+    "web3_provider": "http://127.0.0.1:8545"
+}
+                

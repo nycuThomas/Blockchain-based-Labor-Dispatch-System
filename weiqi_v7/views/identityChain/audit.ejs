@@ -1,0 +1,53 @@
+<%- include('./header') -%>
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-6 mx-auto mt-4">
+            <form>
+                <div class="form-group">
+                    <label id="">Role</label>
+                    <select class="form-select form-control func1-input0" name="type">
+                        <option value="" disabled selected>Select</option>
+                        <option value="person">Person</optin>
+                        <option value="organization">Organization</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label id="">Name</label>
+                  <input type="text" placeholder="Enter user or organization name" aria-label="Parameter" aria-describedby="basic-addon2" required="required" class="func1-input1 form-control">
+                </div>
+                <div class="form-group">
+                    <label id="">Number</label>
+                    <input type="text" placeholder="Enter ID card or uniform numbers" aria-label="Parameter" aria-describedby="basic-addon2" required="required" class="func1-input2 form-control">
+                </div>
+                <button type="button" class="func1 btn btn-block btn-success">Verify</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(".func1").on('click', async function (e) {
+            let input_0 = $(".func1-input0").val();
+            let input_1 = $(".func1-input1").val();
+            let input_2 = $(".func1-input2").val();
+            console.log(input_0,input_1,input_2)
+            
+            $.ajax({
+                url: '/identityChain/addUser',
+                data: { type: input_0, Name: input_1, IDNumber: input_2},
+                type: 'post',
+                cache: false,
+                dataType: 'json',
+                success: function(res) {
+                    alert(res.msg);
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            });
+            
+        });
+</script>
+
+<%- include('./footer') -%>

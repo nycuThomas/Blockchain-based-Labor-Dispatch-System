@@ -1,0 +1,149 @@
+<%- include('./header') %> 
+
+    <% if(info.length){ %>
+        <% if(info=="Created successfully." ){ %>
+            <div class="alert alert-success">
+                <%= info %>
+            </div>
+        <% } else { %>
+            <div class="alert alert-danger">
+                <%= info %>
+            </div>
+            <% } %>
+    <% } %>
+    
+    <div class="container mt-4">
+        <div class="row my-4">
+            <div class="col-md-6 center-block offset-md-3">
+                <div class="card shadow text-center">
+                    <div class="card-header bg-primary">
+                        <h3 class="text-light">Welcome</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="person-tab" data-toggle="tab" href="#person" role="tab" aria-controls="person" aria-selected="true">Person</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="person" role="tabpanel" aria-labelledby="person-tab">
+                                <form action="/identityChain/login" method="post" class="mt-4">
+                                    <div class="input-group">
+                                        <input type="text" name="userName" placeholder="User Name" required="required" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group">
+                                            <input type="password" name="IDNumber" placeholder="ID Card Number" data-bs-toggle="password" required="required" class="form-control">
+                                            <div class="input-group-append" style="cursor: pointer;"></div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="login" class="btn btn-primary btn-lg btn-block mt-3">
+                                    <button type="submit" value="register" data-toggle="modal" data-target="#registerModal" class="btn btn-success btn-lg btn-block mt-3">register</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
+                                <form action="/identityChain/loginOrg" method="post" class="mt-4">
+                                    <div class="input-group"><input type="text" name="organizationName" placeholder="Organization Name" required="required" class="form-control"></div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group">
+                                            <input type="password" name="uniformNumber" placeholder="Uniform Number" data-bs-toggle="password" required="required" class="form-control">
+                                            <div class="input-group-append" style="cursor: pointer;"></div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="login" class="btn btn-primary btn-lg btn-block mt-3">
+                                    <button type="submit" value="register" data-toggle="modal" data-target="#OrgRegisterModal" class="btn btn-success btn-lg btn-block mt-3">register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog">
+            <div class="modal-content card shadow">
+                <div class="card-header bg-success">
+                    <h3 class="text-light text-center">Register as person</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/identityChain/api/user" method="post">
+                        <div class="mb-3">
+                            <label id="">User Name</label>
+                            <input type="text" name="userName" class="form-control form-control-lg" placeholder="Enter user name" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Birth Date</label>
+                            <input type="text" name="birth" class="form-control form-control-lg" placeholder="Enter birth date e.g.2000/01/01" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Email</label>
+                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Phone</label>
+                            <input type="tel" name="phone" class="form-control form-control-lg" placeholder="Enter phone number" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">ID Number</label>
+                            <input type="text" name="IDNumber" class="form-control form-control-lg" placeholder="Enter ID card number" required="required">
+                        </div>
+                        <div class="mb-3 d-grid">
+                            <input type="submit" value="Sign up" class="btn btn-success btn-lg btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="OrgRegisterModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog">
+            <div class="modal-content card shadow">
+                <div class="card-header bg-success">
+                    <h3 class="text-light text-center">Register as organization</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/identityChain/api/organization" method="post" id="Org">
+                        <div class="mb-3">
+                            <label id="">Organization</label>
+                            <input type="text" name="organizationName" class="form-control form-control-lg" placeholder="Enter organization name" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Person In Charge</label>
+                            <input type="text" name="personInCharge" class="form-control form-control-lg" placeholder="Enter person in charge name" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Phone</label>
+                            <input type="tel" name="phone" class="form-control form-control-lg" placeholder="Enter phone number" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Email</label>
+                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Uniform Numbers</label>
+                            <input type="text" name="UniformNumbers" class="form-control form-control-lg" placeholder="Enter uniform numbers" required="required">
+                        </div>
+                        <div class="mb-3">
+                            <label id="">Usage Scenario</label>
+                            <select class="form-control form-control-lg" form="Org" name="type">
+                                <option value="E-portfolio">Labor Dispatch</optin>
+                                <option value="BiomedicalInformation">Biomedical Information</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 d-grid">
+                            <input type="submit" value="Sign up" class="btn btn-success btn-lg btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<%- include('./footer') %> 

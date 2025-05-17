@@ -1,0 +1,62 @@
+{
+  "name": "fablo-test-network-org3",
+  "description": "Connection profile for Org3 in Fablo network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "Org3"
+  },
+  "organizations": {
+    "Org3": {
+      "mspid": "Org3MSP",
+      "peers": [
+        "peer0.org1.example.com",
+        "peer0.org2.example.com",
+        "peer0.org3.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca.org3.example.com"
+      ]
+    }
+  },
+  "peers": {
+    "peer0.org1.example.com": {
+      "url": "grpcs://localhost:7041",
+      "tlsCACerts": {
+        "path": "/Users/weiqi/Desktop/project/fablo-target/fabric-config/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org1.example.com"
+      }
+    },
+    "peer0.org2.example.com": {
+      "url": "grpcs://localhost:7061",
+      "tlsCACerts": {
+        "path": "/Users/weiqi/Desktop/project/fablo-target/fabric-config/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org2.example.com"
+      }
+    },
+    "peer0.org3.example.com": {
+      "url": "grpcs://localhost:7081",
+      "tlsCACerts": {
+        "path": "/Users/weiqi/Desktop/project/fablo-target/fabric-config/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org3.example.com"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca.org3.example.com": {
+      "url": "https://localhost:7080",
+      "caName": "ca.org3.example.com",
+      "tlsCACerts": {
+        "path": "/Users/weiqi/Desktop/project/fablo-target/fabric-config/crypto-config/peerOrganizations/org3.example.com/ca/ca.org3.example.com-cert.pem"
+      },
+      "httpOptions": {
+        "verify": false
+      }
+    }
+  }
+}

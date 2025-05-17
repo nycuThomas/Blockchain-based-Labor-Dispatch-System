@@ -1,0 +1,79 @@
+{
+	"abi": [
+		{
+		  "inputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "constructor"
+		},
+		{
+		  "inputs": [
+			{
+			  "internalType": "string",
+			  "name": "hashed",
+			  "type": "string"
+			},
+			{
+			  "internalType": "uint256",
+			  "name": "userType",
+			  "type": "uint256"
+			}
+		  ],
+		  "name": "addUser",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		},
+		{
+		  "inputs": [
+			{
+			  "internalType": "string",
+			  "name": "hashed",
+			  "type": "string"
+			},
+			{
+			  "internalType": "address",
+			  "name": "userAddress",
+			  "type": "address"
+			}
+		  ],
+		  "name": "bindAccount",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		},
+		{
+		  "inputs": [
+			{
+			  "internalType": "address",
+			  "name": "userAddress",
+			  "type": "address"
+			}
+		  ],
+		  "name": "getAccessManagerAddress",
+		  "outputs": [
+			{
+			  "internalType": "address",
+			  "name": "",
+			  "type": "address"
+			}
+		  ],
+		  "stateMutability": "view",
+		  "type": "function",
+		  "constant": true
+		},
+		{
+		  "inputs": [],
+		  "name": "getId",
+		  "outputs": [
+			{
+			  "internalType": "string",
+			  "name": "",
+			  "type": "string"
+			}
+		  ],
+		  "stateMutability": "view",
+		  "type": "function",
+		  "constant": true
+		}
+	]
+}
