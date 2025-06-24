@@ -35,5 +35,5 @@ Compared to existing technologies, the proposed model demonstrates signifi-cant 
 3. Deploy contracts to a local blockchain 
 
 ## 📜 License
-MI
+MIT 
 
